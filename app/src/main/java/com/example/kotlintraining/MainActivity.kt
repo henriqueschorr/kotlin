@@ -1,15 +1,19 @@
 package com.example.kotlintraining
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val tag = this::class.simpleName
 
     private var notePosition = POSITION_NOT_SET
 
@@ -39,6 +43,8 @@ class MainActivity : AppCompatActivity() {
             DataManager.notes.add(NoteInfo())
             notePosition = DataManager.notes.lastIndex
         }
+
+        Log.d(tag, "onCreate")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -47,12 +53,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayNote() {
+        if(notePosition > DataManager.notes.lastIndex){
+            Log.e(tag, "Invalid note Position $notePosition, max valid position ${DataManager.notes.lastIndex}")
+            showMessage("No more notes")
+            return
+        }
+
+        Log.i(tag, "Displaying note for position $notePosition")
         val note = DataManager.notes[notePosition]
         textNoteTitle.setText(note.title)
         textNoteText.setText(note.text)
 
         val coursePosition = DataManager.courses.values.indexOf(note.course)
         spinnerCourses.setSelection(coursePosition)
+    }
+
+    private fun showMessage(message: String){
+        Snackbar.make(textNoteTitle, message, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -96,6 +113,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         saveNote()
+        Log.d(tag, "onPause")
     }
 
     private fun saveNote() {
