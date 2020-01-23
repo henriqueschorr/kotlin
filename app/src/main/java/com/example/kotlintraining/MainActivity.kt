@@ -1,7 +1,6 @@
 package com.example.kotlintraining
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -9,7 +8,6 @@ import android.widget.ArrayAdapter
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,18 +18,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val adapterCourses = ArrayAdapter<CourseInfo>(this, android.R.layout.simple_spinner_item, DataManager.courses.values.toList())
+        val adapterCourses = ArrayAdapter<CourseInfo>(
+            this,
+            android.R.layout.simple_spinner_item,
+            DataManager.courses.values.toList()
+        )
         adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         spinnerCourses.adapter = adapterCourses
 
-        notePosition = intent.getIntExtra(EXTRA_NOTE_POSITION, POSITION_NOT_SET)
+        notePosition =
+            savedInstanceState?.getInt(NOTE_POSITION, POSITION_NOT_SET) ?: intent.getIntExtra(
+                NOTE_POSITION,
+                POSITION_NOT_SET
+            )
 
-        if(notePosition != POSITION_NOT_SET)
+        if (notePosition != POSITION_NOT_SET)
             displayNote()
+        else {
+            DataManager.notes.add(NoteInfo())
+            notePosition = DataManager.notes.lastIndex
+        }
     }
 
-    private fun displayNote(){
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(NOTE_POSITION, notePosition)
+    }
+
+    private fun displayNote() {
         val note = DataManager.notes[notePosition]
         textNoteTitle.setText(note.title)
         textNoteText.setText(note.text)
@@ -60,17 +75,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun moveNext(){
+    private fun moveNext() {
         ++notePosition
         displayNote()
         invalidateOptionsMenu()
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        if(notePosition >= DataManager.notes.lastIndex){
+        if (notePosition >= DataManager.notes.lastIndex) {
             val menuItem = menu?.findItem(R.id.action_next)
 
-            if(menuItem != null){
+            if (menuItem != null) {
                 menuItem.icon = getDrawable(R.drawable.ic_block_white_24dp)
                 menuItem.isEnabled = false
             }
