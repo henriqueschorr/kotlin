@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class NoteRecyclerAdapter(private val context: Context, private val notes: List<NoteInfo>) : RecyclerView.Adapter<NoteRecyclerAdapter.ViewHolder>() {
+class NoteRecyclerAdapter(private val context: Context?, private val notes: List<NoteInfo>) : RecyclerView.Adapter<NoteRecyclerAdapter.ViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
 
@@ -37,7 +37,7 @@ class NoteRecyclerAdapter(private val context: Context, private val notes: List<
             itemView.setOnClickListener {
                 val intent = Intent(context, NoteActivity::class.java)
                 intent.putExtra(NOTE_POSITION, notePosition)
-                context.startActivity(intent)
+                context?.startActivity(intent)
             }
         }
 
