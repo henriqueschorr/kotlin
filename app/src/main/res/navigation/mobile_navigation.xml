@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_notes">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_notes"
         android:name="com.example.kotlintraining.ui.notes.NotesFragment"
         android:label="@string/menu_notes"
         tools:layout="@layout/fragment_notes" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_courses"
         android:name="com.example.kotlintraining.ui.courses.CoursesFragment"
         android:label="@string/menu_courses"
         tools:layout="@layout/fragment_courses" />
