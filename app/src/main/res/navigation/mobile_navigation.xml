@@ -7,15 +7,15 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.kotlintraining.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.example.kotlintraining.ui.notes.NotesFragment"
+        android:label="@string/menu_notes"
+        tools:layout="@layout/fragment_notes" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.kotlintraining.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="com.example.kotlintraining.ui.courses.CoursesFragment"
+        android:label="@string/menu_courses"
+        tools:layout="@layout/fragment_courses" />
 
     <fragment
         android:id="@+id/nav_slideshow"

@@ -1,4 +1,4 @@
-package com.example.kotlintraining.ui.home
+package com.example.kotlintraining.ui.notes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

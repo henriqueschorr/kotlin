@@ -1,4 +1,4 @@
-package com.example.kotlintraining.ui.gallery
+package com.example.kotlintraining.ui.courses
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.kotlintraining.R
 
-class GalleryFragment : Fragment() {
+class CoursesFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var coursesViewModel: CoursesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        galleryViewModel =
-            ViewModelProviders.of(this).get(GalleryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
+        coursesViewModel =
+            ViewModelProviders.of(this).get(CoursesViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_courses, container, false)
         val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(this, Observer {
+        coursesViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root
