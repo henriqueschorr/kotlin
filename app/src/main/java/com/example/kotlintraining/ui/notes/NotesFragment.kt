@@ -25,6 +25,7 @@ class NotesFragment : Fragment() {
 
         root.listItems?.layoutManager = LinearLayoutManager(activity)
         root.listItems?.adapter = NoteRecyclerAdapter(activity, DataManager.notes)
+        root.listItems?.adapter
 
         return root
     }

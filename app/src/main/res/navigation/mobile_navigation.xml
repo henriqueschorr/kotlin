@@ -18,16 +18,10 @@
         tools:layout="@layout/fragment_courses" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.kotlintraining.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.example.kotlintraining.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/nav_recent_notes"
+        android:name="com.example.kotlintraining.ui.recentNotes.RecentFragment"
+        android:label="Recent Notes"
+        tools:layout="@layout/fragment_recent_notes" />
 
     <fragment
         android:id="@+id/nav_share"

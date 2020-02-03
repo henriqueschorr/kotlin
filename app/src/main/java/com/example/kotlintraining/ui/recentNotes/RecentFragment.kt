@@ -1,4 +1,4 @@
-package com.example.kotlintraining.ui.courses
+package com.example.kotlintraining.ui.recentNotes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.kotlintraining.CourseRecyclerAdapter
 import com.example.kotlintraining.DataManager
 import com.example.kotlintraining.R
-import com.example.kotlintraining.ui.recentNotes.RecentViewModel
 import kotlinx.android.synthetic.main.fragment_notes.view.*
 
-class CoursesFragment : Fragment() {
+class RecentFragment : Fragment() {
 
-    private lateinit var coursesViewModel: CoursesViewModel
+    private lateinit var coursesViewModel: RecentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +22,7 @@ class CoursesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         coursesViewModel =
-            ViewModelProviders.of(this).get(CoursesViewModel::class.java)
+            ViewModelProviders.of(this).get(RecentViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_courses, container, false)
 //        val textView: TextView = root.findViewById(R.id.text_gallery)
 //        coursesViewModel.text.observe(this, Observer {

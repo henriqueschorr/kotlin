@@ -42,4 +42,6 @@ class NoteRecyclerAdapter(private val context: Context?, private val notes: List
         }
 
     }
+
+
 }
