@@ -24,6 +24,33 @@ object DataManager {
         return null
     }
 
+    private fun simulateLoadDelay() {
+        Thread.sleep(1000)
+    }
+
+    fun loadNotes(vararg noteIds: Int): List<NoteInfo> {
+        simulateLoadDelay()
+        val noteList: List<NoteInfo>
+
+        if(noteIds.isEmpty())
+            noteList = notes
+        else {
+            noteList = ArrayList<NoteInfo>(noteIds.size)
+            for(noteId in noteIds)
+                noteList.add(notes[noteId])
+        }
+        return noteList
+    }
+
+    fun idOfNote(note: NoteInfo) = notes.indexOf(note)
+
+    fun noteIdsAsIntArray(notes: List<NoteInfo>): IntArray {
+        val noteIds = IntArray(notes.size)
+        for(index in 0..notes.lastIndex)
+            noteIds[index] = DataManager.idOfNote(notes[index])
+        return noteIds
+    }
+
     private fun initializeCourses() {
         var course = CourseInfo("course1", "Course 1");
         courses.set(course.courseId, course);

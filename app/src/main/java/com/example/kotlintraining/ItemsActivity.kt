@@ -31,10 +31,16 @@ class ItemsActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             startActivity(Intent(this, NoteActivity::class.java))
         }
+
+        recentNotesViewModel = ViewModelProviders.of(this).get(RecentNotesViewModel::class.java)
+
+        if(savedInstanceState !=null)
+            recentNotesViewModel.restoreState(savedInstanceState)
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
-        recentNotesViewModel = ViewModelProviders.of(this).get(RecentNotesViewModel::class.java)
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -47,12 +53,12 @@ class ItemsActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//        if (outState != null) {
-//            outState.putParcelableArrayList("recentNotes", recentNotesViewModel.recentlyViewedNotes)
-//        }
-//    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (outState != null) {
+            recentNotesViewModel.saveState(outState)
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

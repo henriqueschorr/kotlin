@@ -1,14 +1,15 @@
 package com.example.kotlintraining.ui.recentNotes
 
+import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.kotlintraining.DataManager
 import com.example.kotlintraining.NoteInfo
 
 class RecentNotesViewModel : ViewModel() {
 
     private val maxRecentlyViewedNotes = 5
     val recentlyViewedNotes = ArrayList<NoteInfo>(maxRecentlyViewedNotes)
-//    val recentlyViewedNotes = MutableLiveData<ArrayList<NoteInfo>>()
 
     fun addToRecentlyViewedNotes(note: NoteInfo) {
 //         Check if selection is already in the list
@@ -26,7 +27,18 @@ class RecentNotesViewModel : ViewModel() {
                 recentlyViewedNotes[index + 1] = recentlyViewedNotes[index]
             recentlyViewedNotes[0] = note
         }
-//        recentlyViewedNotes.value?.add(note)
-//        recentlyViewedNotes.add(note)
+    }
+
+    fun saveState(outState: Bundle) {
+        val noteIds = DataManager.noteIdsAsIntArray(recentlyViewedNotes)
+        outState.putIntArray("NOTE_IDS", noteIds)
+    }
+
+    fun restoreState(savedInstanceState: Bundle) {
+        val noteIds = savedInstanceState.getIntArray("NOTE_IDS")
+        if (noteIds != null) {
+            val noteList = DataManager.loadNotes(*noteIds)
+            recentlyViewedNotes.addAll(noteList)
+        }
     }
 }
