@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class NoteRecyclerAdapter(private val context: Context?, private val notes: List<NoteInfo>) : RecyclerView.Adapter<NoteRecyclerAdapter.ViewHolder>() {
+class RecentNotesRecyclerAdapter(private val context: Context?, private val notes: List<NoteInfo>) : RecyclerView.Adapter<RecentNotesRecyclerAdapter.ViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
     private var onNoteSelectedListener: OnNoteSelectedListener? = null

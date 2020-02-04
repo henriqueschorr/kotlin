@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.kotlintraining.CourseRecyclerAdapter
 import com.example.kotlintraining.DataManager
 import com.example.kotlintraining.R
-import com.example.kotlintraining.ui.recentNotes.RecentViewModel
 import kotlinx.android.synthetic.main.fragment_notes.view.*
 
 class CoursesFragment : Fragment() {

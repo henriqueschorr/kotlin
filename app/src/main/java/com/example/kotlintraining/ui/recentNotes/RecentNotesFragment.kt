@@ -1,21 +1,23 @@
-package com.example.kotlintraining.ui.notes
+package com.example.kotlintraining.ui.recentNotes
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kotlintraining.CourseRecyclerAdapter
 import com.example.kotlintraining.DataManager
-import com.example.kotlintraining.NoteInfo
-import com.example.kotlintraining.NoteRecyclerAdapter
 import com.example.kotlintraining.R
-import com.example.kotlintraining.ui.recentNotes.RecentNotesViewModel
+import com.example.kotlintraining.RecentNotesRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_notes.*
 import kotlinx.android.synthetic.main.fragment_notes.view.*
+import kotlinx.android.synthetic.main.item_note.*
 
-class NotesFragment : Fragment(), NoteRecyclerAdapter.OnNoteSelectedListener {
+class RecentNotesFragment : Fragment() {
 
     private lateinit var recentNotesViewModel: RecentNotesViewModel
 
@@ -24,28 +26,16 @@ class NotesFragment : Fragment(), NoteRecyclerAdapter.OnNoteSelectedListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_notes, container, false)
-        val adapter = NoteRecyclerAdapter(activity, DataManager.notes)
-        adapter.setOnSelectedListener(this)
+
+        val root = inflater.inflate(R.layout.fragment_recent_notes, container, false)
 
         recentNotesViewModel = activity?.run {
             ViewModelProviders.of(this)[RecentNotesViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
 
         root.listItems?.layoutManager = LinearLayoutManager(activity)
-        root.listItems?.adapter = adapter
 
+        root.listItems?.adapter = RecentNotesRecyclerAdapter(activity, recentNotesViewModel.recentlyViewedNotes)
         return root
     }
-
-    override fun onResume() {
-        super.onResume()
-        activity?.listItems?.adapter?.notifyDataSetChanged()
-    }
-
-    override fun onNoteSelected(note: NoteInfo) {
-        recentNotesViewModel.addToRecentlyViewedNotes(note)
-    }
-
-
 }

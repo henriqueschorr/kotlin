@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_recent_notes"
-        android:name="com.example.kotlintraining.ui.recentNotes.RecentFragment"
+        android:name="com.example.kotlintraining.ui.recentNotes.RecentNotesFragment"
         android:label="Recent Notes"
         tools:layout="@layout/fragment_recent_notes" />
 
