@@ -22,8 +22,6 @@ class ItemsActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var recentNotesViewModel: RecentNotesViewModel
 
-    val noteGetTogetherHelper = NoteGetTogetherHelper(this, lifecycle)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_items)

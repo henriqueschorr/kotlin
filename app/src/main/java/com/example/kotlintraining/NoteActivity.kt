@@ -2,12 +2,11 @@ package com.example.kotlintraining
 
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -16,6 +15,8 @@ class NoteActivity : AppCompatActivity() {
     private val tag = this::class.simpleName
 
     private var notePosition = POSITION_NOT_SET
+
+    val noteGetTogetherHelper = NoteGetTogetherHelper(this, lifecycle)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +54,7 @@ class NoteActivity : AppCompatActivity() {
     }
 
     private fun displayNote() {
-        if(notePosition > DataManager.notes.lastIndex){
+        if (notePosition > DataManager.notes.lastIndex) {
             Log.e(tag, "Invalid note Position $notePosition, max valid position ${DataManager.notes.lastIndex}")
             showMessage("No more notes")
             return
@@ -68,7 +69,7 @@ class NoteActivity : AppCompatActivity() {
         spinnerCourses.setSelection(coursePosition)
     }
 
-    private fun showMessage(message: String){
+    private fun showMessage(message: String) {
         Snackbar.make(textNoteTitle, message, Snackbar.LENGTH_LONG).show()
     }
 
@@ -86,6 +87,10 @@ class NoteActivity : AppCompatActivity() {
             R.id.action_settings -> true
             R.id.action_next -> {
                 moveNext()
+                true
+            }
+            R.id.action_get_together -> {
+                noteGetTogetherHelper.sendMessage(DataManager.loadNote(notePosition))
                 true
             }
             else -> super.onOptionsItemSelected(item)

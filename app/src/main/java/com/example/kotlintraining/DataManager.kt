@@ -24,6 +24,8 @@ object DataManager {
         return null
     }
 
+    fun loadNote(noteId: Int) = notes[noteId]
+
     private fun simulateLoadDelay() {
         Thread.sleep(1000)
     }

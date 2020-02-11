@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.kotlintraining.NoteActivity">
     <item
+        android:id="@+id/action_get_together"
+        android:icon="@drawable/ic_people_black_24dp"
+        android:orderInCategory="100"
+        android:title="Next"
+        app:showAsAction="ifRoom|withText" />
+    <item
         android:id="@+id/action_next"
         android:icon="@drawable/ic_forward_white_24dp"
         android:orderInCategory="100"
