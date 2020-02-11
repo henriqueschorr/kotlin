@@ -2,6 +2,7 @@ package com.example.kotlintraining
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -21,6 +22,8 @@ class ItemsActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var recentNotesViewModel: RecentNotesViewModel
 
+    val noteGetTogetherHelper = NoteGetTogetherHelper(this, lifecycle)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_items)
@@ -34,9 +37,10 @@ class ItemsActivity : AppCompatActivity() {
 
         recentNotesViewModel = ViewModelProviders.of(this).get(RecentNotesViewModel::class.java)
 
-        if(savedInstanceState !=null)
+        if(recentNotesViewModel.isNewlyCreated && savedInstanceState !=null)
             recentNotesViewModel.restoreState(savedInstanceState)
 
+        recentNotesViewModel.isNewlyCreated = false
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)

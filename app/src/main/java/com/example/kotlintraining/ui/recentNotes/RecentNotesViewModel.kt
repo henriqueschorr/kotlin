@@ -7,6 +7,7 @@ import com.example.kotlintraining.DataManager
 import com.example.kotlintraining.NoteInfo
 
 class RecentNotesViewModel : ViewModel() {
+    var isNewlyCreated = true
 
     private val maxRecentlyViewedNotes = 5
     val recentlyViewedNotes = ArrayList<NoteInfo>(maxRecentlyViewedNotes)
